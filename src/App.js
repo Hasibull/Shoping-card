@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Card from './shoping-card/card'
+import CardHeader from './shoping-card/cardHeader';
+import DisplayTotal from './shoping-card/displayTotal';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+        total: 0
+    }
+  }
+
+  getEachTotal = (childData) =>{
+      this.setState({total: this.state.total + childData});
+  }
+  render () {
+    return (
+      <React.Fragment>
+        <CardHeader/>
+        <Card bookName="Algorithm" bookPrice="500" getTotal = {this.getEachTotal}/>
+        <Card bookName="Pragmatic Programmer" bookPrice="700" getTotal = {this.getEachTotal}/>
+        <Card bookName="Eloquent Javascript" bookPrice="600" getTotal = {this.getEachTotal}/>
+        <Card bookName="C++ Complete Reference" bookPrice="300" getTotal = {this.getEachTotal}/>
+        <Card bookName="Head First Java" bookPrice="500" getTotal = {this.getEachTotal}/>
+        <DisplayTotal setTotal={this.state.total}/>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
